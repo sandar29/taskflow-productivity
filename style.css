@@ -1950,21 +1950,23 @@ label {
 /* Dropdown notifikasi: rata tengah dan tidak terpotong di layar HP */
 @media screen and (max-width: 600px) {
     .notif-wrapper {
-        position: static !important;
+        position: relative;
     }
 
     .notif-dropdown {
-        position: fixed !important;
-        top: 175px !important;
-        left: 50% !important;
-        right: auto !important;
-        width: calc(100vw - 24px) !important;
-        max-width: 400px !important;
-        margin: 0 !important;
-        transform: translateX(-50%) !important;
-        box-sizing: border-box !important;
-        z-index: 9999 !important;
+        position: fixed;
+        top: 175px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: none;
+        box-sizing: border-box;
+        z-index: 9999;
     }
+}
 
     .notif-list {
         max-height: min(280px, 45vh);
