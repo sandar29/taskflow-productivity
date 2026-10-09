@@ -1441,9 +1441,28 @@ a {
         font-size: 10px;
     }
 
-    .calendar-task {
-        display: none; /* Sembunyikan teks di dalam sel grid HP agar tidak berantakan */
-    }
+  .calendar-task {
+display: flex;
+font-size: 8px;
+padding: 3px 2px;
+gap: 3px;
+min-width: 0;
+max-width: 100%;
+}
+
+.calendar-task > span(.task-dot) {
+flex: 1;
+min-width: 0;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.task-dot {
+width: 5px;
+height: 5px;
+flex-shrink: 0;
+}
 
     .calendar-more {
         display: block;
