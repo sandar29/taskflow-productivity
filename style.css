@@ -1892,3 +1892,17 @@ a {
         justify-content: center;
     }
 }
+
+/* Mencegah zoom akibat double-tap pada elemen interaktif */
+html {
+  touch-action: manipulation;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+label {
+  touch-action: manipulation;
+}
