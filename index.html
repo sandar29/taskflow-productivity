@@ -98,30 +98,32 @@
                 </div>
             </div>
             <div class="top-actions">
-    <button class="icon-btn" id="topSearchBtn" type="button" title="Search" aria-label="Search">⌕</button>
-    <div class="notif-wrapper" style="position: relative;">
-        <button class="icon-btn" id="notifBtn" type="button" title="Notifications" aria-label="Notifications">
-    <!-- SVG Lonceng Hitam -->
-    <svg class="notif-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-    </svg>
-    <span id="notifBadge" class="notif-badge" style="display: none;">0</span>
-</button>
-        
-        <!-- Dropdown Notifikasi -->
-        <div id="notifDropdown" class="notif-dropdown" style="display: none;">
-            <div class="notif-header">
-                <strong>Notifications</strong>
-                <button type="button" id="clearNotifBtn" class="notif-clear">Clear All</button>
-            </div>
-            <div id="notifList" class="notif-list">
-                <!-- Daftar notifikasi diisi lewat JS -->
-            </div>
+<button class="icon-btn" id="topSearchBtn" type="button" title="Search" aria-label="Search">⌕</button>
+
+<!-- Tombol Dark/Light Mode -->
+<button class="icon-btn" id="darkModeBtn" type="button" title="Dark Mode" aria-label="Dark Mode">◐</button>
+
+<!-- Dropdown Notifikasi -->
+<div class="notif-wrapper" style="position: relative;">
+    <button class="icon-btn" id="notifBtn" type="button" title="Notifications" aria-label="Notifications">
+        <svg class="notif-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+        </svg>
+        <span id="notifBadge" class="notif-badge" style="display: none;">0</span>
+    </button>
+
+    <div id="notifDropdown" class="notif-dropdown" style="display: none;">
+        <div class="notif-header">
+            <strong>Notifications</strong>
+            <button type="button" id="clearNotifBtn" class="notif-clear">Clear All</button>
         </div>
+        <div id="notifList" class="notif-list"></div>
     </div>
-    <button class="icon-btn" id="darkModeBtn" type="button" title="Dark Mode" aria-label="Dark Mode">◐</button>
-    <div class="top-divider"></div>
-    <button class="avatar" type="button" aria-label="Profile">SN</button>
+</div>
+
+<div class="top-divider"></div>
+<button class="avatar" type="button" aria-label="Profile">SN</button>
+
 </div>
         </header>
 
