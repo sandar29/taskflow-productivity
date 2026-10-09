@@ -1907,19 +1907,25 @@ label {
   touch-action: manipulation;
 }
 
-/* Memusatkan dropdown notifikasi di layar HP */
+/* Posisi dropdown notifikasi di layar HP */
 @media screen and (max-width: 600px) {
+.notif-wrapper {
+position: static !important;
+}
+
 .notif-dropdown {
-position: fixed !important;
-left: 50% !important;
-right: auto !important;
-top: 125px !important;
-bottom: auto !important;
-transform: translateX(-50%) !important;
-width: calc(100vw - 24px) !important;
-max-width: 360px !important;
-margin: 0 !important;
-box-sizing: border-box !important;
+    position: fixed !important;
+    top: 175px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: 400px !important;
+    margin-inline: auto !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+    z-index: 9999;
 }
+
 }
+
 
