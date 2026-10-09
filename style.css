@@ -1,0 +1,1894 @@
+/* =========================================================
+   TASKFLOW — JOBGIO-INSPIRED SOFT MODERN NEUMORPHIC THEME
+   FULL COMPLETE STYLESHEET
+   ========================================================= */
+
+/* =========================================================
+   01. DESIGN SYSTEM & VARIABLES
+   ========================================================= */
+:root {
+    --bg-outer: #eef1f5;
+    --card-bg: #ffffff;
+    --surface-soft: #f4f6f9;
+    --surface-hover: #e9ecef;
+
+    --text-main: #111827;
+    --text-secondary: #4b5563;
+    --muted: #9ca3af;
+
+    --accent-black: #0f172a;
+    --accent-black-hover: #1e293b;
+
+    --primary: #2563eb;
+    --primary-soft: #eff6ff;
+    --primary-border: #bfdbfe;
+
+    --border-subtle: #f1f5f9;
+    --border: #e2e8f0;
+
+    --green: #16a34a;
+    --green-soft: #f0fdf4;
+    --green-border: #bbf7d0;
+
+    --orange: #d97706;
+    --orange-soft: #fffbeb;
+    --orange-border: #fde68a;
+
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --red-border: #fecaca;
+
+    --purple: #7c3aed;
+    --purple-soft: #f5f3ff;
+
+    --sidebar-width: 240px;
+    --topbar-height: 70px;
+
+    --radius-pill: 9999px;
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+
+    --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+    --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.04);
+    --shadow-inset: inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -2px 4px rgba(0, 0, 0, 0.02);
+
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* DARK MODE OVERRIDES */
+body.dark-mode {
+    --bg-outer: #0b0f19;
+    --card-bg: #111827;
+    --surface-soft: #1f2937;
+    --surface-hover: #374151;
+
+    --text-main: #f9fafb;
+    --text-secondary: #d1d5db;
+    --muted: #6b7280;
+
+    --accent-black: #f9fafb;
+    --accent-black-hover: #e5e7eb;
+
+    --border-subtle: #1f2937;
+    --border: #374151;
+
+    --green-soft: rgba(22, 163, 74, 0.15);
+    --orange-soft: rgba(217, 119, 6, 0.15);
+    --red-soft: rgba(220, 38, 38, 0.15);
+    --purple-soft: rgba(124, 58, 237, 0.15);
+    --primary-soft: rgba(37, 99, 235, 0.15);
+
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-inset: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .menu-item.active {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+body.dark-mode .add-task-btn,
+body.dark-mode .save-btn,
+body.dark-mode .avatar {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+/* =========================================================
+   02. RESET & BASE STYLES
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-outer);
+    color: var(--text-main);
+    padding: 16px;
+    height: 100vh; /* Set tinggi tepat 100vh agar tidak meluap */
+    overflow: hidden; /* Mencegah seluruh layar body ikut terscroll */
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--transition), color var(--transition);
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    background: transparent;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================================
+   03. APP LAYOUT
+   ========================================================= */
+
+.app {
+    display: flex;
+    gap: 20px;
+    max-width: 1480px;
+    margin: 0 auto;
+    height: 100%; /* Mengikuti tinggi body */
+}
+
+/* =========================================================
+   04. SIDEBAR
+   ========================================================= */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-card);
+    flex-shrink: 0;
+    height: 100%; /* Kunci tinggi sidebar pas setinggi kontainer */
+    transition: transform var(--transition);
+}
+
+/* Pastikan kontainer logo menggunakan flexbox agar gambar & teks sejajar */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Jarak antara gambar dan teks */
+}
+
+.logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* Menghilangkan background bawaan teks jika ada */
+    padding: 0;
+}
+
+.logo-mark img {
+    width: 36px;          /* Sesuaikan lebar logo */
+    height: 36px;         /* Sesuaikan tinggi logo */
+    object-fit: cover;    /* Diubah dari contain ke cover agar gambar mengisi area lengkungan dengan sempurna */
+    display: block;
+    
+    /* MEMBUAT MELENGKUNG (ESTETIK) */
+    border-radius: 8px;   /* Nilai 8px - 12px biasanya sangat ideal dan modern untuk melengkungkan sudut */
+    
+    /* EFEK TAMBAHAN BIAR MAKIN ESTETIK (OPSIONAL) */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Memberi bayangan halus agar logo terlihat timbul */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Garis luar tipis agar transisi antar-background lebih halus */
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text strong {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-text span {
+    font-size: 0.75rem;
+    color: #6b7280; /* Warna subtle untuk subtext */
+    line-height: 1;
+}
+
+.menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-title {
+    padding: 0 12px;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all var(--transition);
+}
+
+.menu-item:hover {
+    color: var(--text-main);
+    background: var(--surface-soft);
+}
+
+.menu-item.active {
+    background: var(--accent-black);
+    color: var(--card-bg);
+    font-weight: 600;
+}
+
+.menu-icon {
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+}
+
+.category-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.category-dot.work { background: #2563eb; }
+.category-dot.personal { background: #16a34a; }
+.category-dot.study { background: #7c3aed; }
+.category-dot.other { background: #f59e0b; }
+
+.sidebar-bottom {
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.settings-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    transition: background var(--transition);
+}
+
+.settings-btn:hover {
+    background: var(--surface-soft);
+    color: var(--text-main);
+}
+
+/* =========================================================
+   05. MAIN CONTAINER
+   ========================================================= */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    height: 100%; /* Kunci tinggi main */
+    overflow-y: auto; /* Aktifkan scrollbar khusus hanya di bagian isian ini */
+    padding-right: 4px; /* Memberi sedikit jarak agar scrollbar tidak menempel */
+}
+
+/* =========================================================
+   06. TOPBAR
+   ========================================================= */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobile-menu-btn {
+    display: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-card);
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-main);
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.breadcrumb strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    box-shadow: var(--shadow-card);
+    font-size: 16px;
+    transition: transform var(--transition);
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+}
+
+.top-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    background: var(--accent-black);
+    color: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+   07. CONTENT & PAGE HEADER
+   ========================================================= */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.page-header {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-card);
+}
+
+.page-heading .greeting {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 2px;
+}
+
+.page-heading .date {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.add-task-btn {
+    background: var(--accent-black);
+    color: var(--card-bg);
+    padding: 12px 22px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background var(--transition), transform var(--transition);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+.add-task-btn:hover {
+    background: var(--accent-black-hover);
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   08. DASHBOARD QUICK STATS (JOBGIO PILL CARDS)
+   ========================================================= */
+.dashboard-stats-section {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat-card {
+    background: var(--surface-soft);
+    border-radius: 36px;
+    padding: 26px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    box-shadow: var(--shadow-inset);
+    border: 1px solid var(--border-subtle);
+    transition: transform var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon.total { color: var(--text-main); }
+.stat-icon.completed { color: var(--green); }
+.stat-icon.pending { color: var(--orange); }
+.stat-icon.overdue { color: var(--red); }
+
+.stat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+/* PRODUCTIVITY CARD IN DASHBOARD */
+.productivity-card {
+    background: var(--surface-soft);
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-inset);
+}
+
+.productivity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.8px;
+}
+
+.productivity-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.progress-percentage {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.progress-track {
+    height: 8px;
+    background: var(--border);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-black);
+    border-radius: var(--radius-pill);
+    transition: width 0.4s ease;
+}
+
+/* =========================================================
+   09. TASK SECTION & TOOLBAR
+   ========================================================= */
+.task-section {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.section-header p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.task-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-soft);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    width: 260px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 12px;
+    width: 100%;
+    color: var(--text-main);
+}
+
+.search-icon {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group select {
+    background: var(--surface-soft);
+    border: none;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+}
+
+.task-filter {
+    display: flex;
+    background: var(--surface-soft);
+    padding: 3px;
+    border-radius: var(--radius-pill);
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    transition: all var(--transition);
+}
+
+.filter-btn.active {
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* =========================================================
+   10. TASK ITEM LIST
+   ========================================================= */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--surface-soft);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    transition: all var(--transition);
+}
+
+.task-item:hover {
+    background: var(--surface-hover);
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--card-bg);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition);
+}
+
+.task-checkbox.checked {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.task-content {
+    flex: 1;
+    margin: 0 16px;
+    min-width: 0;
+}
+
+.task-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.task-item.completed .task-title {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.task-description {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.category, .priority, .task-status, .deadline-status, .deadline {
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+}
+
+.task-status.completed {
+    background: var(--green-soft);
+    color: var(--green);
+}
+
+.task-status.in-progress {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.priority.urgent { color: var(--red); background: var(--red-soft); }
+.priority.important { color: var(--orange); background: var(--orange-soft); }
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.task-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: all var(--transition);
+}
+
+.task-action:hover {
+    color: var(--text-main);
+    transform: translateY(-1px);
+}
+
+.task-action.delete:hover {
+    color: var(--red);
+    background: var(--red-soft);
+}
+
+/* EMPTY STATE */
+.empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.empty-state p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+.empty-add-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-soft);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* =========================================================
+   11. CALENDAR VIEW
+   ========================================================= */
+/* =========================================================
+   11. CALENDAR VIEW REFINEMENT (CLEAN & NEAT LAYOUT)
+   ========================================================= */
+
+.calendar-view {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar-title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calendar-btn, .calendar-nav-btn {
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-soft);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.calendar-btn:hover, .calendar-nav-btn:hover {
+    background: var(--surface-hover);
+}
+
+.calendar-nav-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* CALENDAR GRID STRUCTURE */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    background: var(--surface-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    gap: 1px; /* Garis pemisah tipis antartanggal */
+    border: 1px solid var(--border-subtle);
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    padding: 12px;
+    background: var(--card-bg);
+}
+
+.calendar-day {
+    min-width: 0;
+    background: var(--card-bg);
+    min-height: 100px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    transition: background var(--transition);
+    position: relative;
+}
+
+.calendar-day:hover {
+    background: var(--surface-soft);
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+    background: var(--surface-soft);
+}
+
+.calendar-day.today {
+    box-shadow: inset 0 0 0 2px var(--accent-black);
+}
+
+.calendar-day.selected {
+    background: var(--primary-soft);
+}
+
+.calendar-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.calendar-task {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-soft);
+    color: var(--text-main);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.calendar-task {
+    min-width: 0;
+}
+
+/* Judul di dalam chip (anak flex perlu aturan sendiri agar ellipsis bekerja) */
+.calendar-task > span:not(.task-dot) {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.calendar-task.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+}
+
+.task-dot.urgent { background: var(--red); }
+.task-dot.important { background: var(--orange); }
+
+.calendar-more {
+    font-size: 9px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* DETAIL SECTIONS BELOW GRID */
+.calendar-selected-section,
+.calendar-upcoming-section,
+.calendar-overdue-section {
+    background: var(--surface-soft);
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-inset);
+}
+
+.calendar-section-heading h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+/* TASK ITEM DI BAWAH KALENDER (FIX ALIGNMENT) */
+.calendar-task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    gap: 16px;
+}
+
+.calendar-task-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--card-bg);
+    cursor: pointer;
+    flex-shrink: 0;
+    background: transparent;
+}
+
+.calendar-task-check.checked {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.calendar-task-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.calendar-task-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    overflow-wrap: anywhere;
+}
+
+.calendar-task-item.completed .calendar-task-title {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.calendar-task-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.calendar-task-priority,
+.calendar-task-category,
+.calendar-task-status {
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-soft);
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.calendar-task-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.calendar-edit-btn,
+.calendar-delete-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+
+.calendar-edit-btn:hover { color: var(--text-main); }
+.calendar-delete-btn:hover { color: var(--red); background: var(--red-soft); }
+
+.calendar-empty {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 8px 0;
+}
+
+/* =========================================================
+   12. MODAL OVERLAYS & FORMS
+   ========================================================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.close-btn {
+    font-size: 20px;
+    color: var(--muted);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-soft);
+    color: var(--text-main);
+    outline: none;
+    font-size: 13px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.task-date-info {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.task-date-info.error {
+    color: var(--red);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-soft);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.save-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-black);
+    color: var(--card-bg);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.delete-modal .modal-content {
+    text-align: center;
+    max-width: 380px;
+}
+
+.delete-modal-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--red-soft);
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 auto 12px;
+}
+
+.delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.delete-confirm-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    background: var(--red);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.setting-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 13px;
+}
+
+/* =========================================================
+   13. RESPONSIVE BREAKPOINTS
+   ========================================================= */
+/* =========================================================
+   MOBILE RESPONSIVE REFINEMENT (HP & TABLET)
+   ========================================================= */
+
+/* TABLET (Layar <= 1024px) */
+@media (max-width: 1024px) {
+    body {
+        padding: 0; /* Menghilangkan padding luar agar penuh di HP */
+    }
+
+    .app {
+        height: 100vh;
+    }
+
+    .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 1000;
+        transform: translateX(-100%);
+        width: 260px;
+        border-radius: 0;
+        height: 100vh;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .main {
+        padding: 16px;
+    }
+}
+
+/* SMARTPHONE (Layar <= 640px) */
+@media (max-width: 640px) {
+    .main {
+        padding: 12px;
+    }
+
+    /* Page Header */
+    .page-header {
+        padding: 18px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .add-task-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Quick Stats - 2 Kolom Rapi */
+    .dashboard-stats-section {
+        padding: 18px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stat-card {
+        border-radius: 24px;
+        padding: 16px 8px;
+        gap: 8px;
+    }
+
+    .stat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+    .stat-number {
+        font-size: 20px;
+    }
+
+    /* Task Toolbar Stacked */
+    .task-section {
+        padding: 18px;
+    }
+
+    .task-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .filter-group {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .filter-group select {
+        width: 100%;
+    }
+
+    .task-filter {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .filter-btn {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Task Item Card di Mobile */
+    .task-item {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .task-meta {
+        gap: 4px;
+    }
+
+    .category, .priority, .task-status, .deadline-status, .deadline {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    /* Kalender di Layar HP */
+    .calendar-view {
+        padding: 16px;
+    }
+
+    .calendar-day {
+        min-height: 55px;
+        padding: 4px;
+    }
+
+    .calendar-date {
+        font-size: 10px;
+    }
+
+    .calendar-task {
+        display: none; /* Sembunyikan teks di dalam sel grid HP agar tidak berantakan */
+    }
+
+    .calendar-more {
+        display: block;
+        font-size: 8px;
+    }
+}
+
+/* =========================================================
+   TOAST NOTIFICATION SYSTEM
+   ========================================================= */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+    min-width: 280px;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+    color: var(--text-main);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 4px solid var(--accent-black);
+    animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1), fadeOut 0.3s ease 2.7s forwards;
+}
+
+.toast.success { border-left-color: #10b981; }
+.toast.error { border-left-color: #ef4444; }
+.toast.info { border-left-color: #3b82f6; }
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* =========================================================
+   NOTIFICATION DROPDOWN UI
+   ========================================================= */
+.notif-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--card-bg);
+}
+
+.notif-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 300px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-subtle);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.notif-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.notif-clear {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.notif-clear:hover {
+    color: var(--red);
+}
+
+.notif-list {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.notif-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.notif-item:hover {
+    background: var(--surface-soft);
+}
+
+.notif-item.urgent {
+    border-left: 3px solid #ef4444;
+}
+
+.notif-item-title {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.notif-item-desc {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.notif-empty {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================================================
+   DASHBOARD: UP NEXT & PROFILE
+   ========================================================= */
+.up-next {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.up-next-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.up-next-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.up-next-empty {
+    padding: 22px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--surface-soft);
+    border-radius: var(--radius-lg);
+}
+
+.avatar {
+    cursor: pointer;
+}
+
+/* Topbar di layar sempit: agar avatar tidak terpotong */
+@media (max-width: 480px) {
+    .topbar-left {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .breadcrumb > span {
+        display: none;
+    }
+
+    .top-actions {
+        flex-shrink: 0;
+        gap: 6px;
+    }
+
+    .top-divider {
+        display: none;
+    }
+}
+
+/* Teks panjang tanpa spasi (mis. "aaaaaaaa...") dipatahkan agar tidak meluber */
+.task-title,
+.task-description,
+.notif-item-title,
+.notif-item-desc,
+.delete-modal-content p,
+.toast span {
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   SETTINGS & CONFIRM DIALOG (REDESIGN)
+   ========================================================= */
+
+/* --- Settings modal --- */
+.settings-modal {
+    max-width: 440px;
+    padding: 24px;
+}
+
+.settings-modal .modal-header {
+    margin-bottom: 4px;
+}
+
+.settings-modal .close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-modal .close-btn:hover {
+    color: var(--text-main);
+}
+
+.settings-group-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 18px 0 6px 4px;
+}
+
+.settings-group {
+    background: var(--surface-soft);
+    border-radius: var(--radius-md);
+    padding: 2px 16px;
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+.settings-row > div {
+    min-width: 0;
+}
+
+.settings-group .settings-row + .settings-row {
+    border-top: 1px solid var(--border);
+}
+
+.settings-row-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.settings-row-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.settings-select {
+    width: 130px;
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+}
+
+.settings-btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.settings-btn-pill:hover {
+    border-color: var(--text-secondary);
+}
+
+.settings-btn-pill.danger {
+    color: var(--red);
+    border-color: rgba(220, 38, 38, 0.35);
+}
+
+.settings-btn-pill.danger:hover {
+    background: var(--red-soft);
+    border-color: var(--red);
+}
+
+.settings-danger-row {
+    margin: 20px 4px 0;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--border);
+}
+
+.settings-modal .modal-actions {
+    margin-top: 22px;
+}
+
+.settings-modal .save-btn {
+    padding: 10px 26px;
+}
+
+/* Cincin fokus tipis (menggantikan cincin hitam tebal bawaan browser) */
+.modal button:focus-visible,
+.modal select:focus-visible {
+    outline: 2px solid var(--text-secondary);
+    outline-offset: 2px;
+}
+
+/* --- Dialog konfirmasi --- */
+.confirm-dialog {
+    max-width: 400px;
+    padding: 24px;
+    text-align: left;
+}
+
+.confirm-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--red-soft);
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 14px;
+}
+
+.confirm-icon[hidden] {
+    display: none;
+}
+
+.confirm-dialog h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.confirm-dialog p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.confirm-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.confirm-extra {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.confirm-extra:hover {
+    color: var(--text-main);
+}
+
+.confirm-extra[hidden] {
+    display: none;
+}
+
+/* Overlay dialog konfirmasi lebih ringan agar tidak "dobel blur" di atas Settings */
+#customConfirmModal {
+    background: rgba(15, 23, 42, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+@media (max-width: 480px) {
+    .settings-modal {
+        padding: 20px;
+    }
+
+    .settings-select {
+        width: 112px;
+    }
+
+    .confirm-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .confirm-buttons {
+        margin-left: 0;
+    }
+
+    .confirm-buttons button {
+        flex: 1;
+    }
+
+    .confirm-extra {
+        justify-content: center;
+    }
+}
