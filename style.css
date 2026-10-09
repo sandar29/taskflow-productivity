@@ -1528,21 +1528,33 @@ a {
 /* =========================================================
    NOTIFICATION DROPDOWN UI
    ========================================================= */
+.notif-wrapper {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+#notifBtn {
+position: relative;
+}
+
 .notif-badge {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    background: #ef4444;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 700;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--card-bg);
+position: absolute;
+top: -2px;
+right: -2px;
+z-index: 10;
+background: #ef4444;
+color: #ffffff;
+font-size: 10px;
+font-weight: 700;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 2px solid var(--card-bg);
+box-sizing: border-box;
 }
 
 .notif-dropdown {
