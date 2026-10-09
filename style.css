@@ -1907,22 +1907,19 @@ label {
   touch-action: manipulation;
 }
 
-/* Fix posisi dropdown Notifications di iPhone */
+/* Memusatkan dropdown notifikasi di layar HP */
 @media screen and (max-width: 600px) {
 .notif-dropdown {
 position: fixed !important;
+left: 50% !important;
+right: auto !important;
 top: 125px !important;
-left: 12px !important;
-right: 12px !important;
-width: auto !important;
-max-width: none !important;
+bottom: auto !important;
+transform: translateX(-50%) !important;
+width: calc(100vw - 24px) !important;
+max-width: 360px !important;
 margin: 0 !important;
 box-sizing: border-box !important;
-transform: none !important;
+}
 }
 
-.notif-dropdown * {
-    box-sizing: border-box;
-}
-
-}
