@@ -1906,3 +1906,23 @@ textarea,
 label {
   touch-action: manipulation;
 }
+
+/* Fix posisi dropdown Notifications di iPhone */
+@media screen and (max-width: 600px) {
+.notif-dropdown {
+position: fixed !important;
+top: 125px !important;
+left: 12px !important;
+right: 12px !important;
+width: auto !important;
+max-width: none !important;
+margin: 0 !important;
+box-sizing: border-box !important;
+transform: none !important;
+}
+
+.notif-dropdown * {
+    box-sizing: border-box;
+}
+
+}
