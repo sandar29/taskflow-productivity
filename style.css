@@ -1427,13 +1427,14 @@ a {
         padding: 3px 8px;
     }
 
+    
     /* Kalender di Layar HP */
     .calendar-view {
         padding: 16px;
     }
 
     .calendar-day {
-        min-height: 70px;
+        min-height: 55px;
         padding: 4px;
         overflow: hidden;
     }
@@ -1442,32 +1443,24 @@ a {
         font-size: 10px;
     }
 
-    /* Nama tugas tetap terlihat di kalender HP */
     .calendar-task {
-        display: flex !important;
-        visibility: visible !important;
+        display: flex;
         align-items: center;
         gap: 3px;
         width: 100%;
         max-width: 100%;
         min-width: 0;
+        box-sizing: border-box;
         padding: 3px 2px;
         margin-top: 3px;
-        overflow: hidden;
         font-size: 8px;
         line-height: 1.2;
-        box-sizing: border-box;
-    }
-
-    .calendar-task .task-dot {
-        flex-shrink: 0;
-        width: 5px;
-        height: 5px;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     .calendar-task > span:not(.task-dot) {
-        display: block !important;
-        visibility: visible !important;
+        display: block;
         flex: 1;
         min-width: 0;
         overflow: hidden;
@@ -1475,12 +1468,17 @@ a {
         white-space: nowrap;
     }
 
+    .calendar-task .task-dot {
+        width: 5px;
+        height: 5px;
+        flex-shrink: 0;
+    }
+
     .calendar-more {
         display: block;
         font-size: 8px;
+        margin-top: 2px;
     }
-}
-
 /* =========================================================
    TOAST NOTIFICATION SYSTEM
    ========================================================= */
